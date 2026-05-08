@@ -14,7 +14,10 @@ function createEmptyState() {
     employees: [],
     workflows: [],
     projects: [],
-    settings: {},
+    settings: {
+      defaultConnection: "",
+      defaultModel: "",
+    },
   };
 }
 
@@ -95,6 +98,7 @@ function selectEmployee(id) {
   $("#inspectorName").textContent = employee?.name || "선택된 항목 없음";
   $("#inspectorDepartment").textContent = department?.name || "-";
   $("#inspectorRole").textContent = employee?.role || "-";
+  $("#inspectorModel").textContent = employee?.model || "-";
   $("#inspectorOutput").textContent = employee?.output || "-";
 }
 
@@ -204,6 +208,7 @@ function editEmployee(id) {
   $("#employeeDepartmentInput").innerHTML = departmentOptions(employee.departmentId);
   $("#employeeRoleInput").value = employee.role || "";
   $("#employeeOutputInput").value = employee.output || "";
+  $("#employeeModelInput").value = employee.model || "";
   $("#employeePromptInput").value = employee.prompt || "";
   $("#employeeCancelEditButton").hidden = false;
 }
@@ -238,6 +243,7 @@ $("#employeeForm").addEventListener("submit", (event) => {
     departmentId: $("#employeeDepartmentInput").value,
     role: $("#employeeRoleInput").value.trim(),
     output: $("#employeeOutputInput").value.trim(),
+    model: $("#employeeModelInput").value.trim(),
     prompt: $("#employeePromptInput").value.trim(),
   };
   if (!employee.name || !employee.departmentId) return;
@@ -285,10 +291,14 @@ $("#projectForm").addEventListener("submit", (event) => {
 
 $("#settingsForm").addEventListener("submit", (event) => {
   event.preventDefault();
+  state.settings.defaultConnection = $("#defaultConnectionInput").value.trim();
+  state.settings.defaultModel = $("#defaultModelInput").value.trim();
   saveState();
 });
 
 $$(".category-tab").forEach((tab) => tab.addEventListener("click", () => showView(tab.dataset.view)));
 
+$("#defaultConnectionInput").value = state.settings.defaultConnection;
+$("#defaultModelInput").value = state.settings.defaultModel;
 renderOffice();
 renderSettings();

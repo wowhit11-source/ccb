@@ -40,6 +40,10 @@
               <dd id="inspectorRole">-</dd>
             </div>
             <div>
+              <dt>모델</dt>
+              <dd id="inspectorModel">-</dd>
+            </div>
+            <div>
               <dt>출력</dt>
               <dd id="inspectorOutput">-</dd>
             </div>
@@ -114,6 +118,10 @@
               <label>
                 <span>출력</span>
                 <input id="employeeOutputInput" name="output" placeholder="예상 출력을 입력하세요" />
+              </label>
+              <label>
+                <span>모델</span>
+                <input id="employeeModelInput" name="model" placeholder="모델 또는 연결 방식을 입력하세요" />
               </label>
               <label>
                 <span>프롬프트</span>
@@ -224,10 +232,18 @@
           <div class="panel-title">
             <div>
               <h2>설정</h2>
-              <p>공개 뼈대에는 개인 데이터가 포함되지 않습니다.</p>
+              <p>연결 방식은 빈 값으로 제공되며 개인 데이터는 포함하지 않습니다.</p>
             </div>
           </div>
           <form class="settings-form" id="settingsForm">
+            <label>
+              <span>기본 연결 방식</span>
+              <input id="defaultConnectionInput" placeholder="예: local, api, cli" />
+            </label>
+            <label>
+              <span>기본 모델</span>
+              <input id="defaultModelInput" placeholder="모델명을 입력하세요" />
+            </label>
             <button class="secondary-button" type="submit">설정 저장</button>
           </form>
         </section>
