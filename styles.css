@@ -1,0 +1,256 @@
+:root {
+  color-scheme: dark;
+  --bg: #1e1e2e;
+  --panel: #242438;
+  --panel-strong: #2f2f46;
+  --ink: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.62);
+  --line: #4a4a6a;
+  --accent: #746fff;
+  --accent-dark: #6030ff;
+  --field: #fff8e9;
+  --field-ink: #181828;
+  --shadow: 4px 4px 0 rgba(8, 8, 18, 0.82);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    var(--bg);
+  background-size: 18px 18px, 18px 18px, auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1440px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.topbar,
+.office-stage,
+.inspector,
+.settings-panel {
+  background: rgba(36, 36, 56, 0.94);
+  border: 3px solid var(--line);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(220px, auto) 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #ffd166;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.category-tab,
+.secondary-button,
+.mini-button {
+  min-height: 38px;
+  border: 2px solid var(--line);
+  border-radius: 2px;
+  color: #fff;
+  background: #2a2a3a;
+  box-shadow: 3px 3px 0 rgba(8, 8, 18, 0.82);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.category-tab {
+  padding: 0 14px;
+}
+
+.category-tab.active,
+.secondary-button {
+  background: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+.app-view {
+  display: none;
+}
+
+.app-view.active {
+  display: block;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+}
+
+.office-stage,
+.inspector,
+.settings-panel {
+  padding: 18px;
+}
+
+.office-map {
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  padding: 14px;
+  border: 3px dashed var(--line);
+  background: #181828;
+}
+
+.department-office,
+.entity-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 14px;
+  border: 2px solid var(--line);
+  background: var(--panel-strong);
+}
+
+.office-people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pixel-employee,
+.mini-button {
+  padding: 7px 10px;
+}
+
+.profile-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+}
+
+.profile-list div {
+  display: grid;
+  gap: 4px;
+}
+
+.profile-list dt,
+.muted-text,
+.empty-state,
+.settings-panel p,
+.entity-card span {
+  color: var(--muted);
+}
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.8fr) minmax(360px, 1.2fr);
+  gap: 18px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.settings-form {
+  display: grid;
+  gap: 14px;
+}
+
+.settings-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.settings-form input,
+.settings-form select,
+.settings-form textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 3px solid #60453e;
+  border-radius: 4px;
+  color: var(--field-ink);
+  background: var(--field);
+  caret-color: var(--field-ink);
+  -webkit-text-fill-color: var(--field-ink);
+}
+
+.settings-form input::placeholder,
+.settings-form textarea::placeholder {
+  color: #7d6754;
+  opacity: 1;
+  -webkit-text-fill-color: #7d6754;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ghost-button {
+  background: #2a2a3a;
+  border-color: var(--line);
+}
+
+.entity-list {
+  display: grid;
+  gap: 10px;
+}
+
+.entity-card {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .topbar,
+  .workspace,
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .category-tabs {
+    justify-content: flex-start;
+  }
+}

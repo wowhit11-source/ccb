@@ -1,0 +1,44 @@
+{
+  "name": "agent-desk-skeleton",
+  "version": "0.1.0",
+  "description": "Public starter shell for a department and agent desk app",
+  "type": "module",
+  "main": "electron/main.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "desktop": "electron .",
+    "build:win": "electron-builder --win nsis portable",
+    "build:mac": "electron-builder --mac dmg",
+    "build:dir": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.example.agent-desk-skeleton",
+    "productName": "Agent Desk Skeleton",
+    "asar": false,
+    "files": [
+      "app.js",
+      "assets/**/*",
+      "*.html",
+      "styles.css",
+      "server.mjs",
+      "electron/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  }
+}

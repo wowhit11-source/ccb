@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Desk Skeleton</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Agent Desk</p>
+          <h1>Agent Desk Skeleton</h1>
+        </div>
+        <nav class="category-tabs" aria-label="화면 카테고리">
+          <button class="category-tab active" type="button" data-view="home">홈</button>
+          <button class="category-tab" type="button" data-view="departments">부서</button>
+          <button class="category-tab" type="button" data-view="employees">직원</button>
+          <button class="category-tab" type="button" data-view="workflows">워크플로우</button>
+          <button class="category-tab" type="button" data-view="projects">프로젝트</button>
+          <button class="category-tab" type="button" data-view="settings">설정</button>
+        </nav>
+      </header>
+
+      <section class="workspace app-view active" id="homeView">
+        <section class="office-stage" aria-label="빈 에이전트 사무실">
+          <div class="office-map" id="officeGrid"></div>
+        </section>
+        <aside class="inspector" aria-label="선택 항목">
+          <p class="eyebrow">Selected</p>
+          <h2 id="inspectorName">선택된 항목 없음</h2>
+          <dl class="profile-list">
+            <div>
+              <dt>부서</dt>
+              <dd id="inspectorDepartment">-</dd>
+            </div>
+            <div>
+              <dt>역할</dt>
+              <dd id="inspectorRole">-</dd>
+            </div>
+            <div>
+              <dt>모델</dt>
+              <dd id="inspectorModel">-</dd>
+            </div>
+            <div>
+              <dt>출력</dt>
+              <dd id="inspectorOutput">-</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="settings-view app-view" id="departmentsView" aria-label="부서 설정">
+        <div class="settings-layout">
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2 id="departmentFormTitle">부서 추가</h2>
+                <p>공개 뼈대에는 기본 부서가 없습니다.</p>
+              </div>
+            </div>
+            <form class="settings-form" id="departmentForm">
+              <input id="departmentEditingIdInput" type="hidden" />
+              <label>
+                <span>부서명</span>
+                <input id="departmentNameInput" name="name" required placeholder="부서명을 입력하세요" />
+              </label>
+              <label>
+                <span>설명</span>
+                <input id="departmentDescriptionInput" name="description" placeholder="부서 설명을 입력하세요" />
+              </label>
+              <label>
+                <span>프롬프트</span>
+                <textarea id="departmentPromptInput" name="prompt" rows="7" placeholder="부서 기본 프롬프트를 입력하세요"></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="secondary-button" id="departmentSubmitButton" type="submit">부서 저장</button>
+                <button class="secondary-button ghost-button" id="departmentCancelEditButton" type="button" hidden>취소</button>
+              </div>
+            </form>
+          </section>
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2>부서 목록</h2>
+                <p id="departmentCountLabel">0개 부서</p>
+              </div>
+            </div>
+            <div class="entity-list" id="departmentList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="settings-view app-view" id="employeesView" aria-label="직원 설정">
+        <div class="settings-layout">
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2 id="employeeFormTitle">직원 추가</h2>
+                <p>공개 뼈대에는 기본 직원이 없습니다.</p>
+              </div>
+            </div>
+            <form class="settings-form" id="employeeForm">
+              <input id="employeeEditingIdInput" type="hidden" />
+              <label>
+                <span>직원명</span>
+                <input id="employeeNameInput" name="name" required placeholder="직원명을 입력하세요" />
+              </label>
+              <label>
+                <span>소속 부서</span>
+                <select id="employeeDepartmentInput" name="departmentId" required></select>
+              </label>
+              <label>
+                <span>역할</span>
+                <input id="employeeRoleInput" name="role" placeholder="역할을 입력하세요" />
+              </label>
+              <label>
+                <span>출력</span>
+                <input id="employeeOutputInput" name="output" placeholder="예상 출력을 입력하세요" />
+              </label>
+              <label>
+                <span>모델</span>
+                <input id="employeeModelInput" name="model" placeholder="모델 또는 연결 방식을 입력하세요" />
+              </label>
+              <label>
+                <span>프롬프트</span>
+                <textarea id="employeePromptInput" name="prompt" rows="7" placeholder="직원 프롬프트를 입력하세요"></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="secondary-button" id="employeeSubmitButton" type="submit">직원 저장</button>
+                <button class="secondary-button ghost-button" id="employeeCancelEditButton" type="button" hidden>취소</button>
+              </div>
+            </form>
+          </section>
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2>직원 목록</h2>
+                <p id="employeeCountLabel">0명 직원</p>
+              </div>
+            </div>
+            <div class="entity-list" id="employeeList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="settings-view app-view" id="workflowsView" aria-label="워크플로우 설정">
+        <div class="settings-layout">
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2>워크플로우 추가</h2>
+                <p>공개 뼈대에는 등록된 워크플로우가 없습니다.</p>
+              </div>
+            </div>
+            <form class="settings-form" id="workflowForm">
+              <label>
+                <span>워크플로우명</span>
+                <input id="workflowNameInput" required placeholder="워크플로우명을 입력하세요" />
+              </label>
+              <label>
+                <span>상태</span>
+                <select id="workflowStatusInput">
+                  <option value="draft">초안</option>
+                  <option value="active">활성</option>
+                  <option value="paused">일시정지</option>
+                </select>
+              </label>
+              <label>
+                <span>설명 / 프롬프트</span>
+                <textarea id="workflowPromptInput" rows="8" placeholder="워크플로우 설명이나 프롬프트를 입력하세요"></textarea>
+              </label>
+              <button class="secondary-button" type="submit">워크플로우 저장</button>
+            </form>
+          </section>
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2>워크플로우 목록</h2>
+                <p id="workflowCountLabel">0개 워크플로우</p>
+              </div>
+            </div>
+            <div class="entity-list" id="workflowList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="settings-view app-view" id="projectsView" aria-label="프로젝트 설정">
+        <div class="settings-layout">
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2>프로젝트 추가</h2>
+                <p>공개 뼈대에는 등록된 프로젝트가 없습니다.</p>
+              </div>
+            </div>
+            <form class="settings-form" id="projectForm">
+              <label>
+                <span>프로젝트명</span>
+                <input id="projectNameInput" required placeholder="프로젝트명을 입력하세요" />
+              </label>
+              <label>
+                <span>내용</span>
+                <textarea id="projectContentInput" rows="8" placeholder="프로젝트 내용을 입력하세요"></textarea>
+              </label>
+              <label>
+                <span>상태</span>
+                <select id="projectStatusInput">
+                  <option value="draft">초안</option>
+                  <option value="active">진행</option>
+                  <option value="done">완료</option>
+                </select>
+              </label>
+              <button class="secondary-button" type="submit">프로젝트 저장</button>
+            </form>
+          </section>
+          <section class="settings-panel">
+            <div class="panel-title">
+              <div>
+                <h2>프로젝트 목록</h2>
+                <p id="projectCountLabel">0개 프로젝트</p>
+              </div>
+            </div>
+            <div class="entity-list" id="projectList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="settings-view app-view" id="settingsView" aria-label="앱 설정">
+        <section class="settings-panel">
+          <div class="panel-title">
+            <div>
+              <h2>설정</h2>
+              <p>연결 정보와 개인 데이터는 공개 뼈대에 포함하지 않습니다.</p>
+            </div>
+          </div>
+          <form class="settings-form" id="settingsForm">
+            <label>
+              <span>기본 연결 방식</span>
+              <input id="defaultConnectionInput" placeholder="예: local, api, cli" />
+            </label>
+            <label>
+              <span>기본 모델</span>
+              <input id="defaultModelInput" placeholder="모델명을 입력하세요" />
+            </label>
+            <button class="secondary-button" type="submit">설정 저장</button>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
